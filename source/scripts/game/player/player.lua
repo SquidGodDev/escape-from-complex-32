@@ -15,7 +15,7 @@ function Player:init()
     self:setCollideRect(0, 0, self:getSize())
     self:setGroups(PLAYER_GROUP)
     self:setCollidesWithGroups({WALL_GROUP, OBSTACLE_GROUP})
-    self:moveTo(200, 120)
+    self:moveTo(200, 180)
     gfx.setDrawOffset(0, 0)
     self:add()
 
@@ -25,7 +25,7 @@ function Player:init()
     self.xDamping = 0.18
     self.wallBoost = 5
 
-    self.launchStrength = 15
+    self.launchStrength = 10
 
     self.laserGun = LaserGun(self.x, self.y, self)
 
@@ -60,7 +60,7 @@ function Player:update()
         self.xVelocity *= -1
         self.yVelocity -= self.wallBoost
     end
-    gfx.setDrawOffset(0, -math.floor(self.y) + 120)
+    gfx.setDrawOffset(0, -math.floor(self.y) + 180)
 end
 
 function Player:collisionResponse(other)

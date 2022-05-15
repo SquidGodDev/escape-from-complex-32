@@ -13,11 +13,11 @@ function LaserTimer:init(laserGunInstance)
     self.lineWidth = 2
     self.cornerRadius = 2
 
-    local timerMaxTime = 60
+    local timerMaxTime = 30
     self.timerMax = timerMaxTime
     self.timerValue = timerMaxTime
     self:setCenter(0, 0)
-    self:moveTo(400 - self.timerWidth - 10, 10)
+    self:moveTo(400 - self.timerWidth - 25, 10)
     self:add()
 end
 

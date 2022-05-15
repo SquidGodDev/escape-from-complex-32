@@ -18,7 +18,6 @@ function LaserBeam:init(x1, y1, angle)
 end
 
 function LaserBeam:drawBeam()
-    print(self.angle)
     local x2 = math.ceil(math.cos(math.rad(self.angle - 90)) * self.beamLength)
     local y2 = math.ceil(math.sin(math.rad(self.angle - 90)) * self.beamLength)
     local beamImage = gfx.image.new(self.beamLength * 2, self.beamLength * 2)
