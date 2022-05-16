@@ -1,16 +1,17 @@
+import "scripts/game/obstacles/spike"
+
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-class('Obstacle').extends(gfx.sprite)
+class('ObstacleSpawner').extends(gfx.sprite)
 
-function Obstacle:init(x, y)
-    self.spawnHeight = y
-    self:moveTo(x, y)
+function ObstacleSpawner:init()
     self:add()
 end
 
-function Obstacle:update()
+function ObstacleSpawner:update()
     local drawOffsetX, drawOffsetY = gfx.getDrawOffset()
+    local curHeight = drawOffsetY - 120
     if drawOffsetY - self.spawnHeight > 500 then
         self:remove()
     end

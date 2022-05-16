@@ -28,4 +28,5 @@ function GameBackground:update()
     local drawOffsetX, drawOffsetY = gfx.getDrawOffset()
     local moveY = -math.floor(drawOffsetY / 120) * 120 + 120
     self:moveTo(200, moveY)
+    print(drawOffsetY)
 end
