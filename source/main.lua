@@ -7,6 +7,7 @@ import "scripts/signal"
 import "scripts/game/player/player"
 import "scripts/game/background/gameBackground"
 import "scripts/game/background/heightDisplay"
+import "scripts/game/obstacles/obstacleSpawner"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -18,9 +19,11 @@ OBSTACLE_GROUP = 3
 SignalManager = Signal()
 
 local function initialize()
+    math.randomseed(pd.getSecondsSinceEpoch())
     Player()
     GameBackground()
     HeightDisplay()
+    ObstacleSpawner()
     -- local backgroundImage = gfx.image.new("images/background")
     -- gfx.sprite.setBackgroundDrawingCallback(
     --     function(x, y, width, height)

@@ -3,15 +3,14 @@ local gfx <const> = pd.graphics
 
 class('Obstacle').extends(gfx.sprite)
 
-function Obstacle:init(x, y)
+function Obstacle:init(y)
     self.spawnHeight = y
-    self:moveTo(x, y)
     self:add()
 end
 
 function Obstacle:update()
-    local drawOffsetX, drawOffsetY = gfx.getDrawOffset()
-    if drawOffsetY - self.spawnHeight > 500 then
+    local drawOffsetX, curHeight = gfx.getDrawOffset()
+    if self.spawnHeight + curHeight > 1000 then
         self:remove()
     end
 end
