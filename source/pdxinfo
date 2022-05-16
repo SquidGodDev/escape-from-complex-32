@@ -1,0 +1,6 @@
+name=Escape from Complex 32
+author=SquidGodDev
+description=Launch yourself with a laser to escape!!
+bundleID=com.squidgoddev.escapefromcomplex32
+version=0.1
+imagePath=images/card
