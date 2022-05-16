@@ -6,6 +6,7 @@ import "CoreLibs/timer"
 import "scripts/signal"
 import "scripts/game/player/player"
 import "scripts/game/background/gameBackground"
+import "scripts/game/background/heightDisplay"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -19,6 +20,7 @@ SignalManager = Signal()
 local function initialize()
     Player()
     GameBackground()
+    HeightDisplay()
     -- local backgroundImage = gfx.image.new("images/background")
     -- gfx.sprite.setBackgroundDrawingCallback(
     --     function(x, y, width, height)
