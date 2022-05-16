@@ -6,6 +6,8 @@ local gfx <const> = pd.graphics
 class('Player').extends(gfx.sprite)
 
 function Player:init()
+    self.playerYOffset = 180
+
     local playerRadius = 16
     local playerImage = gfx.image.new(playerRadius * 2, playerRadius * 2)
     gfx.pushContext(playerImage)
@@ -15,7 +17,7 @@ function Player:init()
     self:setCollideRect(0, 0, self:getSize())
     self:setGroups(PLAYER_GROUP)
     self:setCollidesWithGroups({WALL_GROUP, OBSTACLE_GROUP})
-    self:moveTo(200, 180)
+    self:moveTo(200, self.playerYOffset)
     gfx.setDrawOffset(0, 0)
     self:add()
 
@@ -57,10 +59,27 @@ function Player:update()
     self.laserGun:moveTo(newX, newY)
     local actualX, actualY, collisions, length = self:moveWithCollisions(newX, newY)
     if length > 0 then
-        self.xVelocity *= -1
-        self.yVelocity -= self.wallBoost
+        local hitObstacle = false
+        for index, collision in ipairs(collisions) do
+            local collidedObject = collision['other']
+            if collidedObject:isa(Obstacle) then
+                hitObstacle = true
+            end
+        end
+
+        if hitObstacle then
+            resetGame()
+        else
+            self.xVelocity *= -1
+            self.yVelocity -= self.wallBoost
+        end
     end
-    gfx.setDrawOffset(0, -math.floor(self.y) + 180)
+
+    local newHeight = -math.floor(self.y) + self.playerYOffset
+    if newHeight > MAX_HEIGHT then
+        MAX_HEIGHT = newHeight
+    end
+    gfx.setDrawOffset(0, newHeight)
 end
 
 function Player:collisionResponse(other)

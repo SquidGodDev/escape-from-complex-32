@@ -7,7 +7,7 @@ class('ObstacleSpawner').extends(gfx.sprite)
 
 function ObstacleSpawner:init()
     self.lastSpawnHeight = 0
-    self.spawnGap = 100
+    self.spawnGap = 150
     self:add()
 end
 
