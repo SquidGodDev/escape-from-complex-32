@@ -7,6 +7,8 @@ class('Spike').extends(Obstacle)
 
 function Spike:init(y)
     Spike.super.init(self, y)
+    self.minX = 30
+    self.maxX = 370
     local spikeImage = gfx.image.new("images/game/spike")
     self:setImage(spikeImage)
 
@@ -17,6 +19,6 @@ function Spike:init(y)
     self:setCollideRect(collisionPadding, collisionPadding, collisionWidth, collisionHeight)
     self:setGroups(OBSTACLE_GROUP)
 
-    local randX = math.random(30, 370)
+    local randX = math.random(self.minX, self.maxX)
     self:moveTo(randX, y)
 end
