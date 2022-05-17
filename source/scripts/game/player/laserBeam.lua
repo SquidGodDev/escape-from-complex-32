@@ -4,7 +4,7 @@ local gfx <const> = pd.graphics
 class('LaserBeam').extends(gfx.sprite)
 
 function LaserBeam:init(x1, y1, angle)
-    self.beamLength = 200
+    self.beamLength = 400
     self.beamWidth = 10
     self.beamDuration = 300
     self.angle = angle
