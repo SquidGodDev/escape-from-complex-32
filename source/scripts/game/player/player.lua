@@ -42,6 +42,10 @@ function Player:launch(angle)
 end
 
 function Player:update()
+    if pd.buttonJustPressed(pd.kButtonUp) then
+        self.laserGun:shoot()
+    end
+
     self.yVelocity += 9.8/30
     if self.yVelocity >= self.maxVelocity then
         self.yVelocity = self.maxVelocity

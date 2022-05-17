@@ -1,4 +1,3 @@
-import "scripts/game/player/laserTimer"
 import "scripts/game/player/laserBeam"
 
 local pd <const> = playdate
@@ -20,8 +19,6 @@ function LaserGun:init(x, y, playerInstance)
     self.gunPointY = 0
     self.minAngle = 110
     self.maxAngle = 250
-
-    LaserTimer(self)
 end
 
 function LaserGun:update()
