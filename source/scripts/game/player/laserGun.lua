@@ -55,6 +55,10 @@ function LaserGun:moveTo(x, y)
 end
 
 function LaserGun:shoot()
+    local randLaserSound = math.random(0, 4)
+    local laserSoundPath = "sounds/laser" .. randLaserSound
+    local laserSound = pd.sound.sampleplayer.new(laserSoundPath)
+    laserSound:play()
     self.player:launch(self.curAngle)
     self.laserBeam = LaserBeam(self.x, self.y, self.curAngle)
 end
