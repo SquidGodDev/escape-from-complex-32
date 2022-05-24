@@ -5,7 +5,8 @@ local gfx <const> = pd.graphics
 
 class('Player').extends(gfx.sprite)
 
-function Player:init()
+function Player:init(gameScene)
+    self.gameScene = gameScene
     self.playerYOffset = 180
 
     local playerRadius = 16
@@ -72,7 +73,7 @@ function Player:update()
         end
 
         if hitObstacle then
-            resetGame()
+            self.gameScene:resetGame()
         else
             self.xVelocity *= -1
             self.yVelocity -= self.wallBoost

@@ -14,7 +14,7 @@ function LaserGun:init(x, y, playerInstance)
     self:add()
 
     self.drawPadding = 4
-    self.curAngle = -1
+    self.curAngle = 180
     self.gunPointX = 0
     self.gunPointY = 0
     self.minAngle = 110
@@ -23,11 +23,6 @@ end
 
 function LaserGun:update()
     local crankAngle = pd.getCrankPosition()
-    -- if crankAngle <= self.minAngle then
-    --     crankAngle = self.minAngle
-    -- elseif crankAngle >= self.maxAngle then
-    --     crankAngle = self.maxAngle
-    -- end
     if crankAngle ~= self.curAngle then
         self.curAngle = crankAngle
         local x2, y2 = self:getLineAtAngle(crankAngle, self.laserGunLength)
