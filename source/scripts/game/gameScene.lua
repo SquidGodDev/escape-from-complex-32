@@ -2,7 +2,6 @@ import "scripts/game/player/player"
 import "scripts/game/background/gameBackground"
 import "scripts/game/obstacles/obstacleSpawner"
 import "scripts/game/ui/heightDisplay"
-import "scripts/game/ui/maxHeightDisplay"
 import "scripts/game/ui/resultsDisplay"
 
 local pd <const> = playdate
@@ -18,8 +17,7 @@ end
 function GameScene:setupGame()
     Player(self)
     GameBackground()
-    self.heightDisplay = HeightDisplay()
-    MaxHeightDisplay()
+    HeightDisplay()
     ObstacleSpawner()
 end
 
