@@ -12,8 +12,7 @@ function HeightDisplay:init()
 end
 
 function HeightDisplay:update()
-    local drawOffsetX, drawOffsetY = gfx.getDrawOffset()
-    local displayString = "Height: " .. math.floor(drawOffsetY / 100) .. " m"
+    local displayString = "Height: " .. GET_CURRENT_HEIGHT_IN_METERS() .. " m"
     local displayTextWidth, displayTextHeight = gfx.getTextSize(displayString)
     local displayImage = gfx.image.new(displayTextWidth, displayTextHeight)
     gfx.pushContext(displayImage)

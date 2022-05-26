@@ -1,8 +1,9 @@
 import "scripts/game/player/player"
 import "scripts/game/background/gameBackground"
-import "scripts/game/background/heightDisplay"
-import "scripts/game/background/maxHeightDisplay"
 import "scripts/game/obstacles/obstacleSpawner"
+import "scripts/game/ui/heightDisplay"
+import "scripts/game/ui/maxHeightDisplay"
+import "scripts/game/ui/resultsDisplay"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -17,21 +18,15 @@ end
 function GameScene:setupGame()
     Player(self)
     GameBackground()
-    HeightDisplay()
+    self.heightDisplay = HeightDisplay()
     MaxHeightDisplay()
     ObstacleSpawner()
 end
 
-function GameScene:resetGame()
+function GameScene:displayResults()
+    local curHeight = GET_CURRENT_HEIGHT()
+    local snapshot = gfx.getDisplayImage()
     gfx.setDrawOffset(0, 0)
     gfx.sprite.removeAll()
-    self:setupGame()
-end
-
-function GameScene:stopGame()
-    self:displayResults()
-end
-
-function GameScene:displayResults()
-    
+    ResultsDisplay(self, curHeight, snapshot)
 end

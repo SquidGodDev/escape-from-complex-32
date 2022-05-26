@@ -3,6 +3,7 @@ import "CoreLibs/graphics"
 import "CoreLibs/sprites"
 import "CoreLibs/timer"
 
+import "scripts/globalScripts"
 import "scripts/signal"
 
 import "scripts/game/gameScene"

@@ -9,6 +9,8 @@ function Player:init(gameScene)
     self.gameScene = gameScene
     self.playerYOffset = 180
 
+    self.dead = false
+
     local playerRadius = 16
     local playerImage = gfx.image.new(playerRadius * 2, playerRadius * 2)
     gfx.pushContext(playerImage)
@@ -43,6 +45,10 @@ function Player:launch(angle)
 end
 
 function Player:update()
+    if self.dead then
+        return
+    end
+
     if pd.buttonJustPressed(pd.kButtonUp) then
         self.laserGun:shoot()
     end
@@ -73,7 +79,9 @@ function Player:update()
         end
 
         if hitObstacle then
-            self.gameScene:resetGame()
+            self.gameScene:displayResults()
+            self.dead = true
+            return
         else
             self.xVelocity *= -1
             self.yVelocity -= self.wallBoost
@@ -81,9 +89,6 @@ function Player:update()
     end
 
     local newHeight = -math.floor(self.y) + self.playerYOffset
-    if newHeight > MAX_HEIGHT then
-        MAX_HEIGHT = newHeight
-    end
     gfx.setDrawOffset(0, newHeight)
 end
 
