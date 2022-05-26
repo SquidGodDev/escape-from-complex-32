@@ -6,7 +6,9 @@ import "CoreLibs/timer"
 import "scripts/globalScripts"
 import "scripts/signal"
 
+import "scripts/sceneManager"
 import "scripts/game/gameScene"
+import "scripts/title/titleScene"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -19,7 +21,8 @@ SignalManager = Signal()
 
 MAX_HEIGHT = 0
 
-GameScene()
+SCENE_MANAGER = SceneManager()
+TitleScene()
 
 function pd.update()
     gfx.sprite.update()
