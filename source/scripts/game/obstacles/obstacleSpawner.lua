@@ -5,6 +5,8 @@ import "scripts/game/obstacles/gate"
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+local get_current_height = GET_CURRENT_HEIGHT
+
 class('ObstacleSpawner').extends(gfx.sprite)
 
 function ObstacleSpawner:init()
@@ -15,7 +17,7 @@ function ObstacleSpawner:init()
 end
 
 function ObstacleSpawner:update()
-    local drawOffsetX, curHeight = gfx.getDrawOffset()
+    local curHeight = get_current_height()
     local spawnHeight = math.floor(curHeight / self.spawnGap)
     if spawnHeight > self.lastSpawnHeight then
         self.lastSpawnHeight = spawnHeight
