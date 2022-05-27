@@ -3,8 +3,7 @@ import "CoreLibs/graphics"
 import "CoreLibs/sprites"
 import "CoreLibs/timer"
 
-import "scripts/globalScripts"
-import "scripts/signal"
+import "scripts/globals"
 
 import "scripts/sceneManager"
 import "scripts/game/gameScene"
@@ -13,14 +12,7 @@ import "scripts/title/titleScene"
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-PLAYER_GROUP = 1
-WALL_GROUP = 2
-OBSTACLE_GROUP = 3
-
-SignalManager = Signal()
-
 MAX_HEIGHT = 0
-
 LOAD_GAME_DATA()
 
 SCENE_MANAGER = SceneManager()

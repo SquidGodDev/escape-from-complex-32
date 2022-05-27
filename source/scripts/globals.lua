@@ -1,6 +1,10 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+PLAYER_GROUP = 1
+WALL_GROUP = 2
+OBSTACLE_GROUP = 3
+
 function GET_CURRENT_HEIGHT_IN_METERS()
     local cur_height = GET_CURRENT_HEIGHT()
     return GET_HEIGHT_IN_METERS(cur_height)
