@@ -12,6 +12,7 @@ function Player:init(gameScene)
     self.dead = false
 
     self.destroyedSound = pd.sound.sampleplayer.new("sounds/destroyed")
+    self.bounceSound = pd.sound.sampleplayer.new("sounds/bounce")
 
     local playerRadius = 16
     local playerImage = gfx.image.new(playerRadius * 2, playerRadius * 2)
@@ -91,6 +92,7 @@ function Player:update()
         else
             self.xVelocity *= -1
             self.yVelocity -= self.wallBoost
+            self.bounceSound:play()
         end
     end
 
