@@ -1,6 +1,7 @@
 import "scripts/game/player/player"
 import "scripts/game/background/gameBackground"
 import "scripts/game/obstacles/obstacleSpawner"
+import "scripts/game/obstacles/floorSpikes"
 import "scripts/game/ui/heightDisplay"
 import "scripts/game/ui/resultsDisplay"
 
@@ -19,6 +20,7 @@ function GameScene:setupGame()
     GameBackground()
     HeightDisplay()
     ObstacleSpawner()
+    FloorSpikes()
 end
 
 function GameScene:displayResults()
