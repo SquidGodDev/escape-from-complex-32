@@ -14,13 +14,13 @@ function ResultsDisplay:init(gameScene, height, snapshot)
 
     self.animatingIn = true
     self.animatingOut = false
-    self.animateInDuration = 1000
+    self.animateInDuration = 600
     self.animateOutDuration = 500
     self.snapshotAnimator = gfx.animator.new(self.animateInDuration, 1, 0.5, pd.easingFunctions.linear)
     self.lastDrawnFaded = 1
 
     self.heightDialog = HeightDialog(height)
-    self.dialogAnimator = gfx.animator.new(self.animateInDuration / 2, self.heightDialog.y, 120, pd.easingFunctions.inOutCubic)
+    self.dialogAnimator = gfx.animator.new(self.animateInDuration, self.heightDialog.y, 120, pd.easingFunctions.inOutCubic)
 
     self:setImage(self.snapshot)
     self:setZIndex(500)

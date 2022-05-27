@@ -47,6 +47,10 @@ function TitleScene:init()
     self.titleAnimator = gfx.animator.new(1300, self.titleStartY, 0, pd.easingFunctions.outBounce, 600)
     self.promptAnimator = gfx.animator.new(1000, self.promptStartY, 0, pd.easingFunctions.outExpo, 1600)
 
+    self.promptBlinker = gfx.animation.blinker.new()
+    self.promptBlinker.onDuration = 400
+    self.promptBlinker.offDuration = 400
+
     self.animating = true
     self:add()
 end
@@ -61,23 +65,26 @@ function TitleScene:update()
         self.spikesSprite:moveTo(spikesX, 0)
         local titleY = self.titleAnimator:currentValue()
         self.titleSprite:moveTo(0, titleY)
-        local promptY = self.promptAnimator:currentValue()
-        self.promptSprite:moveTo(0, promptY)
 
-        if self.promptAnimator:ended() then
+        if self.titleAnimator:ended() then
             self.animating = false
-            self.promptBlinker = gfx.animation.blinker.new()
-            self.promptBlinker.onDuration = 400
-            self.promptBlinker.offDuration = 400
-            self.promptBlinker:startLoop()
         end
     else
-        self.promptBlinker:update()
-        if self.promptBlinker.on then
-            self.promptSprite:setVisible(true)
-        else
-            self.promptSprite:setVisible(false)
+        local promptY = self.promptAnimator:currentValue()
+        self.promptSprite:moveTo(0, promptY)
+        if self.promptAnimator:ended() and not self.promptBlinker.running then
+            self.promptBlinker:startLoop()
         end
+
+        self.promptBlinker:update()
+        if self.promptBlinker then
+            if self.promptBlinker.on then
+                self.promptSprite:setVisible(true)
+            else
+                self.promptSprite:setVisible(false)
+            end
+        end
+
         if pd.buttonJustPressed(pd.kButtonA) then
             SCENE_MANAGER:switchScene(GameScene)
         end
