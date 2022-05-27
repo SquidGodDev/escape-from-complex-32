@@ -17,7 +17,10 @@ function Player:init(gameScene)
         gfx.drawCircleAtPoint(playerRadius, playerRadius, playerRadius)
     gfx.popContext()
     self:setImage(playerImage)
-    self:setCollideRect(0, 0, self:getSize())
+
+    local padding = 4
+    local playerWidth, playerHeight = self:getSize()
+    self:setCollideRect(padding, padding, playerWidth - padding * 2, playerHeight - padding * 2)
     self:setGroups(PLAYER_GROUP)
     self:setCollidesWithGroups({WALL_GROUP, OBSTACLE_GROUP})
     self:moveTo(200, self.playerYOffset)
