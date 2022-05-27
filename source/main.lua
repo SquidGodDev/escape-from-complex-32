@@ -21,10 +21,20 @@ SignalManager = Signal()
 
 MAX_HEIGHT = 0
 
+LOAD_GAME_DATA()
+
 SCENE_MANAGER = SceneManager()
 TitleScene()
 
 function pd.update()
     gfx.sprite.update()
     pd.timer.updateTimers()
+end
+
+function pd.gameWillTerminate()
+    SAVE_GAME_DATA()
+end
+
+function pd.gameWillSleep()
+    SAVE_GAME_DATA()
 end
