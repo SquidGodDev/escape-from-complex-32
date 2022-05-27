@@ -11,6 +11,9 @@ function SceneManager:init()
     self:setZIndex(100)
     self.transitionTime = 700
     self.transitioningIn = false
+
+    self.transitionInSound = pd.sound.sampleplayer.new("sounds/transitionIn")
+    self.transitionOutSound = pd.sound.sampleplayer.new("sounds/transitionOut")
 end
 
 function SceneManager:switchScene(scene)
@@ -19,6 +22,7 @@ function SceneManager:switchScene(scene)
     end
     self.transitionAnimator = gfx.animator.new(self.transitionTime, self.maskCircleRadius, 0, pd.easingFunctions.outCubic)
     self.transitioningIn = true
+    self.transitionInSound:play()
     self.newScene = scene
     self:add()
 end
@@ -42,6 +46,7 @@ function SceneManager:update()
         self:setImage(filledScreenRect)
         if self.transitioningIn and self.transitionAnimator:ended() then
             self:loadNewScene()
+            self.transitionOutSound:play()
         elseif self.transitionAnimator:ended() then
             self.transitionAnimator = nil
         end

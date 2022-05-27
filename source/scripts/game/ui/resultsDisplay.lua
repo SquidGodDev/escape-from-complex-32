@@ -24,6 +24,8 @@ function ResultsDisplay:init(gameScene, height, snapshot)
     local metalDoorSound = pd.sound.sampleplayer.new("sounds/metalDoorSliding")
     metalDoorSound:play()
 
+    self.whooshSound = pd.sound.sampleplayer.new("sounds/whoosh")
+
     self:setImage(self.snapshot)
     self:setZIndex(500)
     self:setCenter(0, 0)
@@ -63,6 +65,7 @@ function ResultsDisplay:update()
             self.dialogAnimator = gfx.animator.new(self.animateOutDuration, 120, 320, pd.easingFunctions.inOutCubic)
             self.animatingOut = true
             self.gameScene:setupGame()
+            self.whooshSound:play()
         end
     end
 end

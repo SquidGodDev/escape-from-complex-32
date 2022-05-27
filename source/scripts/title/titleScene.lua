@@ -53,6 +53,20 @@ function TitleScene:init()
 
     self.animating = true
     self:add()
+
+    local metalDoorSound = pd.sound.sampleplayer.new("sounds/metalDoorSliding")
+    metalDoorSound:play()
+
+    local laserSound = pd.sound.sampleplayer.new("sounds/laser1")
+    laserSound:playAt(pd.sound.getCurrentTime() + .6)
+
+    local whooshSound = pd.sound.sampleplayer.new("sounds/whoosh")
+    whooshSound:playAt(pd.sound.getCurrentTime() + .8)
+
+    local metalDropSound = pd.sound.sampleplayer.new("sounds/metalDrop")
+    metalDropSound:playAt(pd.sound.getCurrentTime() + .9)
+
+    self.blipSound = pd.sound.sampleplayer.new("sounds/blip")
 end
 
 function TitleScene:update()
@@ -77,15 +91,16 @@ function TitleScene:update()
         end
 
         self.promptBlinker:update()
-        if self.promptBlinker then
-            if self.promptBlinker.on then
-                self.promptSprite:setVisible(true)
-            else
-                self.promptSprite:setVisible(false)
-            end
+        local promptIsVisible = self.promptSprite:isVisible()
+        if self.promptBlinker.on and not promptIsVisible then
+            self.blipSound:play()
+            self.promptSprite:setVisible(true)
+        elseif not self.promptBlinker.on and promptIsVisible then
+            self.promptSprite:setVisible(false)
         end
 
         if pd.buttonJustPressed(pd.kButtonA) then
+            self.promptBlinker:stop()
             SCENE_MANAGER:switchScene(GameScene)
         end
     end
