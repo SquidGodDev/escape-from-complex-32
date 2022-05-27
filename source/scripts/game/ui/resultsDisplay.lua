@@ -3,7 +3,15 @@ import "scripts/game/ui/heightDialog"
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-
+local fadedRects = {}
+for i=0,55,5 do
+    local fadedRect = gfx.image.new(400, 240)
+    gfx.pushContext(fadedRect)
+        local solidRect = gfx.image.new(400, 240, gfx.kColorBlack)
+        solidRect:drawFaded(0, 0, i / 100, gfx.image.kDitherTypeBayer8x8)
+    gfx.popContext()
+    fadedRects[i] = fadedRect
+end
 
 class('ResultsDisplay').extends(gfx.sprite)
 
@@ -16,7 +24,7 @@ function ResultsDisplay:init(gameScene, height, snapshot)
     self.animatingOut = false
     self.animateInDuration = 600
     self.animateOutDuration = 500
-    self.snapshotAnimator = gfx.animator.new(self.animateInDuration, 1, 0.5, pd.easingFunctions.linear)
+    self.snapshotAnimator = gfx.animator.new(self.animateInDuration, 0, 50, pd.easingFunctions.linear)
     self.lastDrawnFaded = 1
 
     self.heightDialog = HeightDialog(height)
@@ -37,11 +45,16 @@ function ResultsDisplay:update()
     if self.animatingIn then
         local snapshotAnimatorValue = self.snapshotAnimator:currentValue()
         self.lastDrawnFaded = snapshotAnimatorValue
-        local fadedImage = gfx.image.new(400, 240)
-        gfx.pushContext(fadedImage)
-            self.snapshot:drawFaded(0, 0, snapshotAnimatorValue, gfx.image.kDitherTypeBayer8x8)
-        gfx.popContext()
-        self:setImage(fadedImage)
+        local fadedImageIndex = ((snapshotAnimatorValue // 5) * 5)
+        local fadedRect = fadedRects[fadedImageIndex]
+        if fadedRect then
+            local fadedImage = gfx.image.new(400, 240)
+            gfx.pushContext(fadedImage)
+                self.snapshot:draw(0, 0)
+                fadedRect:draw(0,0)
+            gfx.popContext()
+            self:setImage(fadedImage)
+        end
 
         local dialogPosition = self.dialogAnimator:currentValue()
         self.heightDialog:moveTo(self.heightDialog.x, dialogPosition)
