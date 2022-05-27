@@ -21,6 +21,8 @@ function ResultsDisplay:init(gameScene, height, snapshot)
 
     self.heightDialog = HeightDialog(height)
     self.dialogAnimator = gfx.animator.new(self.animateInDuration, self.heightDialog.y, 120, pd.easingFunctions.inOutCubic)
+    local metalDoorSound = pd.sound.sampleplayer.new("sounds/metalDoorSliding")
+    metalDoorSound:play()
 
     self:setImage(self.snapshot)
     self:setZIndex(500)

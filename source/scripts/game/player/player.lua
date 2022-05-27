@@ -11,6 +11,8 @@ function Player:init(gameScene)
 
     self.dead = false
 
+    self.destroyedSound = pd.sound.sampleplayer.new("sounds/destroyed")
+
     local playerRadius = 16
     local playerImage = gfx.image.new(playerRadius * 2, playerRadius * 2)
     gfx.pushContext(playerImage)
@@ -84,6 +86,7 @@ function Player:update()
         if hitObstacle then
             self.gameScene:displayResults()
             self.dead = true
+            self.destroyedSound:play()
             return
         else
             self.xVelocity *= -1

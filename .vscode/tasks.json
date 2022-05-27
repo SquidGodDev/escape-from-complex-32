@@ -23,10 +23,11 @@
 		"type": "shell",
 		"command": "pdc",
 		"args": [
+		  "-k",
 		  "-sdkpath",
 		  "${env:PLAYDATE_SDK_PATH}",
 		  "'${workspaceFolder}\\source'", // source folder
-		  "'${workspaceFolder}/builds/${workspaceFolderBasename}.pdx'" // output file
+		  "'${workspaceFolder}/builds/${workspaceFolderBasename}.pdx'", // output file
 		],
 		"options": {
 		  "cwd": "${env:PLAYDATE_SDK_PATH}" // run from sdk folder to ensure imports work
