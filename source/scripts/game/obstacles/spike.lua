@@ -1,3 +1,6 @@
+-- The stationary spike obstacle. I think it's a pretty
+-- self explanatory class
+
 import "scripts/game/obstacles/obstacle"
 
 local pd <const> = playdate
@@ -19,6 +22,7 @@ function Spike:init(y)
     self:setCollideRect(collisionPadding, collisionPadding, collisionWidth, collisionHeight)
     self:setGroups(OBSTACLE_GROUP)
 
+    -- Just randomly choosing an x position to spawn the spike
     local randX = math.random(self.minX, self.maxX)
     self:moveTo(randX, y)
 end

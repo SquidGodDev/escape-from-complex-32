@@ -1,3 +1,6 @@
+-- The title scene. Yes, I manually animated everything with code.
+-- But, the easing functions make it pretty easy!
+
 import "CoreLibs/animation"
 
 import "scripts/game/gameScene"
@@ -29,6 +32,7 @@ function TitleScene:init()
     self.promptSprite:setCenter(0, 0)
     self.promptSprite:add()
 
+    -- Basically, making sure to start each element off the screen
     self.wallStartY = -240
     self.playerStartX = -400
     self.spikeStartX = 400
@@ -41,12 +45,15 @@ function TitleScene:init()
     self.titleSprite:moveTo(0, self.titleStartY)
     self.promptSprite:moveTo(0, self.promptStartY)
 
+    -- I just played around with the duration values to see what looked good. I relied on the
+    -- last argument a lot to delay the animations to get the timings right
     self.wallsAnimator = gfx.animator.new(700, self.wallStartY, 0, pd.easingFunctions.inOutCubic)
     self.playerAnimator = gfx.animator.new(800, self.playerStartX, 0, pd.easingFunctions.inOutCubic, 300)
     self.spikesAnimator = gfx.animator.new(800, self.spikeStartX, 0, pd.easingFunctions.inOutCubic, 500)
     self.titleAnimator = gfx.animator.new(1300, self.titleStartY, 0, pd.easingFunctions.outBounce, 600)
     self.promptAnimator = gfx.animator.new(1000, self.promptStartY, 0, pd.easingFunctions.outExpo, 1600)
 
+    -- This is to have the "Press A to start" prompt blink like classic arcade games
     self.promptBlinker = gfx.animation.blinker.new()
     self.promptBlinker.onDuration = 400
     self.promptBlinker.offDuration = 400
@@ -57,6 +64,8 @@ function TitleScene:init()
     local metalDoorSound = pd.sound.sampleplayer.new("sounds/metalDoorSliding")
     metalDoorSound:play()
 
+    -- I use the playAt methods to delay the sound to match up with the animation.
+    -- Just used trial and error to get it to match up - nothing sophisticated
     local laserSound = pd.sound.sampleplayer.new("sounds/laser1")
     laserSound:playAt(pd.sound.getCurrentTime() + .6)
 
@@ -100,7 +109,11 @@ function TitleScene:update()
         end
 
         if pd.buttonJustPressed(pd.kButtonA) then
+            -- Had to do this so the blip sound doesn't play
+            -- during the transition sometimes
             self.promptBlinker:stop()
+            -- Using our scene manager! Only used once this
+            -- entire game 😂
             SCENE_MANAGER:switchScene(GameScene)
         end
     end

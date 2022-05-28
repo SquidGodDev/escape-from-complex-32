@@ -1,3 +1,7 @@
+-- The UI popup that slides down when the results are
+-- being displayed to show the current height and max
+-- height
+
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
@@ -8,9 +12,13 @@ function HeightDialog:init(height)
     self.dialogHeight = 140
     self.leftPadding = 30
 
+    -- It's good practice to have these "magic numbers"
+    -- be stored into a variable with a name for better
+    -- readability
     self.borderWidth = 3
     self.cornerRadius = 3
 
+    -- Making sure this sits on top of everything else
     self:setZIndex(600)
 
     local dialogImage = gfx.image.new(self.dialogWidth, self.dialogHeight)
@@ -23,6 +31,8 @@ function HeightDialog:init(height)
         local heightInMeters = GET_HEIGHT_IN_METERS(height)
         local heightScoreText = "Height: " .. heightInMeters .. " m"
         local newHighScore = false
+        -- Here, I check if the height we're at is greater than the current
+        -- max height. Then, I make sure to update it
         if height > MAX_HEIGHT then
             MAX_HEIGHT = height
             newHighScore = true

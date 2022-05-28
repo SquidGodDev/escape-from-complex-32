@@ -1,3 +1,8 @@
+-- The laser timer class I was using to shoot the
+-- laser on a timer. It's not used anymore since
+-- I switched the input method, but I might add
+-- an option to use it for accessibility
+
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 

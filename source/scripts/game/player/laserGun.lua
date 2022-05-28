@@ -1,3 +1,6 @@
+-- Laser gun class that handles the crank input and angles
+-- the laser gun
+
 import "scripts/game/player/laserBeam"
 
 local pd <const> = playdate
@@ -25,6 +28,9 @@ function LaserGun:update()
     local crankAngle = pd.getCrankPosition()
     if crankAngle ~= self.curAngle then
         self.curAngle = crankAngle
+        -- This getLineAtAngle function (see bottom of script) is the same
+        -- as in laserBeam.lua, which uses trigonometry to get the point of
+        -- the end of the line. I use the same strategy to draw the laser gun
         local x2, y2 = self:getLineAtAngle(crankAngle, self.laserGunLength)
         local laserGunImage = gfx.image.new(self.laserGunLength * 2 + self.drawPadding * 2, self.laserGunLength * 2 + self.drawPadding * 2)
         local x1 = self.laserGunLength + self.drawPadding
