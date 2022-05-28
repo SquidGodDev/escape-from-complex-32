@@ -55,7 +55,7 @@ function Player:update()
         return
     end
 
-    if pd.buttonJustPressed(pd.kButtonUp) or pd.buttonJustPressed(pd.kButtonB) or pd.buttonJustPressed(pd.kButtonA) then
+    if pd.buttonJustPressed(pd.kButtonUp) or pd.buttonJustPressed(pd.kButtonDown) or pd.buttonJustPressed(pd.kButtonB) or pd.buttonJustPressed(pd.kButtonA) then
         self.laserGun:shoot()
     end
 
