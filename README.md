@@ -35,4 +35,4 @@ Source code for my Playdate game "Escape from Complex 32, a vertically scrolling
   - `sceneManager.lua` - Class that handles scene transitions
 
 ## License
-All code is under the MIT License.
+All code is licensed under the terms of the MIT license.
